@@ -1,0 +1,29 @@
+# Organization for betahikaru.com
+dn: dc=betahikaru,dc=com
+objectClass: dcObject
+objectClass: organization
+dc: betahikaru
+o: betahikaru.com
+description: The betahikaru.com
+
+# Manager
+dn: cn=Manager,dc=betahikaru,dc=com
+objectClass: organizationalRole
+cn: Manager
+description: Directory Manager
+
+# System User
+dn: ou=People,dc=betahikaru,dc=com
+objectClass: organizationalUnit
+ou: People
+
+# System Group
+dn: ou=Group,dc=betahikaru,dc=com
+objectClass: organizationalUnit
+ou: Group
+
+# Address Book
+dn: ou=Address,dc=betahikaru,dc=com
+objectClass: organizationalUnit
+ou: Address
+

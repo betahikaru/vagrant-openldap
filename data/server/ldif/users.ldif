@@ -1,0 +1,19 @@
+# See /etc/openldap/schema/nis.schema
+
+dn: uid=taro.suzuki,ou=People,dc=betahikaru,dc=com
+objectClass: shadowAccount
+objectClass: posixAccount
+objectClass: account
+objectClass: top
+cn: Taro Suzuki
+uid: taro.suzuki
+uidNumber: 1001
+gidNumber: 1000
+homeDirectory: /home/taro.suzuki
+loginShell: /bin/bash
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 7
+shadowLastChange: 16175
+userPassword: {SSHA}LoLIE6U/RCprSVuO8IMgD2I4YzmyiWsQ
+

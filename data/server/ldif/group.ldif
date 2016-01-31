@@ -1,0 +1,9 @@
+# See /etc/openldap/schema/nis.schema
+
+# test1 group
+dn: cn=test1,ou=Group,dc=betahikaru,dc=com
+objectClass: posixGroup
+objectClass: top
+cn: test1
+gidNumber: 1000
+
