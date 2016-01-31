@@ -38,7 +38,6 @@ Vagrant.configure(2) do |config|
     client.vm.synced_folder "data/client/", "/vagrant"
     client.vm.provision "shell", inline: <<-SHELL
       sudo yum install -y authconfig nss-pam-ldapd openldap-clients
-      sudo authconfig-tui
       sudo authconfig --enableldap --enableldapauth --enablemkhomedir \
         --ldapserver="ldap://192.168.33.21/" \
         --ldapbasedn="dc=betahikaru,dc=com" --update
