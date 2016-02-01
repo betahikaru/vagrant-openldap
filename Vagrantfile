@@ -26,7 +26,12 @@ Vagrant.configure(2) do |config|
       sudo chkconfig slapd on
       sudo /etc/init.d/slapd start
 
-      sudo -u ldap ldapadd -x -W -D "cn=Manager,dc=betahikaru,dc=com" -f /vagrant/ldif/base.ldif
+      sudo -u ldap ldapadd -x -D "cn=Manager,dc=betahikaru,dc=com" \
+        -f /vagrant/ldif/base.ldif -w passwd
+      sudo -u ldap ldapadd -x -D "cn=Manager,dc=betahikaru,dc=com" \
+        -f /vagrant/ldif/group.ldif -w passwd
+      sudo -u ldap ldapadd -x -D "cn=Manager,dc=betahikaru,dc=com" \
+        -f /vagrant/ldif/user.ldif -w passwd
       echo ldap-server provisioned.
     SHELL
   end
