@@ -25,6 +25,7 @@ Vagrant.configure(2) do |config|
       sudo -u ldap slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d
       sudo chkconfig slapd on
       sudo /etc/init.d/slapd start
+      sudo iptables -A INPUT -p tcp --dport 389 -j ACCEPT
 
       sudo -u ldap ldapadd -x -D "cn=Manager,dc=betahikaru,dc=com" \
         -f /vagrant/ldif/base.ldif -w passwd
@@ -44,7 +45,7 @@ Vagrant.configure(2) do |config|
     client.vm.provision "shell", inline: <<-SHELL
       sudo yum install -y authconfig nss-pam-ldapd openldap-clients
       sudo authconfig --enableldap --enableldapauth --enablemkhomedir \
-        --ldapserver="ldap://192.168.33.21/" \
+        --ldapserver="ldap://192.168.33.20/" \
         --ldapbasedn="dc=betahikaru,dc=com" --update
       sudo chkconfig nslcd on
     SHELL
