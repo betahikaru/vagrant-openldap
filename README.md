@@ -27,6 +27,7 @@ We use following.
 - OSX 10.10
 - VitualBox 5.0.14
 - Vagrant 1.8.1
+- [jq](https://stedolan.github.io/jq/) (format output)
 - [asciiflow](http://asciiflow.com) (draw graph)
 
 ## Setup
@@ -38,15 +39,51 @@ vagrant ssh-config >> ~/.ssh/config
 
 ## Usage
 
+- Use openldap-client
+
 ```shell
-# by openldap-client
 vagrant ssh ldap-client
 id taro.suzuki
 
-# by ruby (net-ldap gem)
+# output
+uid=1001(taro.suzuki) gid=1000(test1) 所属グループ=1000(test1)
+```
+
+- Use ruby (net-ldap gem)
+
+```shell
 cd client
 bundle install --path vendor/bundle
-bundle exec ruby app.rb
+bundle exec ruby app.rb | jq .
+
+# output
+{
+  "list": [
+    {
+      "DN": "uid=taro.suzuki,ou=People,dc=betahikaru,dc=com",
+      "attributes": {
+        "dn": "uid=taro.suzuki,ou=People,dc=betahikaru,dc=com",
+        "objectclass": [
+          "shadowAccount",
+          "posixAccount",
+          "account",
+          "top"
+        ],
+        "cn": "Taro Suzuki",
+        "uid": "taro.suzuki",
+        "uidnumber": "1001",
+        "gidnumber": "1000",
+        "homedirectory": "/home/taro.suzuki",
+        "loginshell": "/bin/bash",
+        "shadowmin": "0",
+        "shadowmax": "99999",
+        "shadowwarning": "7",
+        "shadowlastchange": "16175",
+        "userpassword": "{md5}dqIXO+Y5MlTnL/pNbfEDCg=="
+      }
+    }
+  ]
+}
 ```
 
 ## FYI
